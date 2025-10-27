@@ -1,0 +1,13 @@
+{% extends "vichekesho_app/base.html" %}
+
+{% block title %}Akaunti Yangu{% endblock title %}
+
+{% block content %}
+  <div class="form-container">
+    <h2>Akaunti ya {{ user.username }}</h2>
+    <p>Hapa unaweza kusimamia mipangilio ya akaunti yako.</p>
+    <ul class="contact-list">
+        <li><a href="{% url 'users:password_change' %}">Badilisha Nenosiri</a></li>
+    </ul>
+  </div>
+{% endblock content %}

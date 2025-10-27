@@ -1,0 +1,26 @@
+{% extends "vichekesho_app/base.html" %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+  <div class="form-container">
+    <h2>Login to Your Account</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.help_text %}
+            <small class="form-help-text">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <p class="form-error">{{ error }}</p>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="form-button">Login</button>
+    </form>
+    <p class="form-switch">Don't have an account? <a href="{% url 'users:register' %}">Register here</a>.</p>
+  </div>
+{% endblock content %}

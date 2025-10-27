@@ -32,8 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # Local apps
-    'vichekesho_app',
     'users',
+    'vichekesho_app',
 
     # Third-party apps
 
@@ -128,3 +128,8 @@ STATIC_ROOT = BASE_DIR / 'static'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Login/Logout Redirects and URLs
+LOGIN_REDIRECT_URL = 'vichekesho_app:home'
+LOGOUT_REDIRECT_URL = 'vichekesho_app:home'
+LOGIN_URL = 'users:login'

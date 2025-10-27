@@ -15,7 +15,11 @@
 
   <header>
     <div class="header-left">
-      <h1>Cheka </h1>
+      {% if user.is_authenticated %}
+        <h1 class="header-username">KARIBU {{ user.username }}</h1>
+      {% else %}
+        <h1>Cheka</h1>
+      {% endif %}
       <div class="theme-switcher">
         <input type="checkbox" id="theme-toggle" class="theme-toggle-checkbox">
         <label for="theme-toggle" class="theme-toggle-label"></label>
@@ -23,11 +27,23 @@
     </div>
     <nav>
       <ul>
-        <li><a href="{% url 'vichekesho_app:home' %}">Home</a></li>
-        <li><a href="{% url 'vichekesho_app:hadithi' %}">Hadithi</a></li>
-        <li><a href="{% url 'vichekesho_app:picha' %}">Picha</a></li>
-        <li><a href="{% url 'vichekesho_app:about' %}">About</a></li>
-        <li><a href="{% url 'vichekesho_app:contact' %}">Contact</a></li>
+        {% if user.is_authenticated %}
+          <!-- Links for logged-in users -->
+          <li><a href="{% url 'vichekesho_app:home' %}">Vichekesho</a></li>
+          <li><a href="{% url 'vichekesho_app:hadithi' %}">Hadithi</a></li>
+          <li><a href="{% url 'users:account' %}">Akaunti</a></li>
+          <li><a href="{% url 'vichekesho_app:picha' %}">Picha</a></li>
+          <li>
+            <form class="logout-form" action="{% url 'users:logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="logout-button">Logout</button>
+            </form>
+          </li>
+        {% else %}
+          <li><a href="{% url 'about-default' %}">About</a></li>
+          <li class="nav-auth-item"><a href="{% url 'users:login' %}">Login</a></li>
+          <li class="nav-auth-item"><a href="{% url 'users:register' %}">Register</a></li>
+        {% endif %}
       </ul>
     </nav>
   </header>
