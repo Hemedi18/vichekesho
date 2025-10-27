@@ -7,7 +7,7 @@ from .models import Kichekesho
 
 def home(request):
     """ Render the home page of the Vichekesho application. """
-    vichekesho = Kichekesho.objects.order_by('-created_at') 
+    vichekesho = Kichekesho.objects.order_by('?') 
     
   
     return render(request, 'vichekesho_app/home.html', {'vichekesho': vichekesho})
@@ -40,5 +40,6 @@ def soma_kichekesho(request, kichekesho_id):
     """ Render a specific Kichekesho (joke) based on its ID. """
      
     kichekesho = Kichekesho.objects.get(id=kichekesho_id)
-    vichekesho = Kichekesho.objects.order_by('-created_at')[:10]  # Latest 10 jokes
+    # Pata vichekesho 10 bila utaratibu, ukiondoa kile kinachoonyeshwa sasa.
+    vichekesho = Kichekesho.objects.exclude(id=kichekesho_id).order_by('?')[:10]
     return render(request, 'vichekesho_app/soma_kichekesho.html', {'kichekesho': kichekesho, 'vichekesho': vichekesho})

@@ -294,7 +294,7 @@ header nav a.active {
   /* Reset gradient from h2 */
   background: none;
   -webkit-text-fill-color: initial;
-  text-fill-color: initial;
+  
   text-align: left;
 }
 
@@ -357,7 +357,7 @@ header nav a.active {
 .about-hero h2 {
   background: none; /* Override gradient */
   -webkit-text-fill-color: initial;
-  text-fill-color: initial;
+  
   color: var(--primary-color);
 }
 
@@ -504,8 +504,8 @@ body[data-theme="dark"] .kichekesho-item h3 {
     padding-bottom: 5px; /* Adds space for scrollbar if it appears */
   }
 
-  h1 { font-size: 1.4rem; } /* Further reduced font size for h1 on mobile */
-  h2 { font-size: 1.75rem; }
+  h1 { font-size: 0.4rem; } /* Further reduced font size for h1 on mobile */
+  h2 { font-size: 0.75rem; }
   header nav a { font-size: 0.9rem; } /* Reduced font size for nav links */
 
   .kichekesho-grid {
@@ -515,5 +515,9 @@ body[data-theme="dark"] .kichekesho-item h3 {
   .kichekesho-detail {
     padding: 1.5rem;
     border-left-width: 4px;
+  }
+
+  .related-jokes-section h3 {
+    font-size: 20px; /* Minimized font size for related jokes section heading on mobile */
   }
 }
