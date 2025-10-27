@@ -1,0 +1,17 @@
+{% extends "vichekesho_app/base.html" %}
+
+{% block title %}Home - Vichekesho App{% endblock title %}
+
+{% block content %}
+  <h2>Vichekesho vipya</h2>
+  
+  <div class="kichekesho-grid">
+    {% for kichekesho in vichekesho%}
+      <div class="kichekesho-item">
+        <h3>{{ kichekesho.title }}</h3>
+        <p>{{ kichekesho.content | truncatewords:20 }}</p>
+        <a href="{% url 'vichekesho_app:soma_kichekesho' kichekesho.id %}" class="read-more">Soma zaidi &rarr;</a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

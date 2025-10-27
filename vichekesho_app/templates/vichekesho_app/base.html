@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{%block title%}{% endblock title %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <h1>Vichekesho App</h1>
+      <div class="theme-switcher">
+        <input type="checkbox" id="theme-toggle" class="theme-toggle-checkbox">
+        <label for="theme-toggle" class="theme-toggle-label"></label>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="{% url 'vichekesho_app:home' %}">Home</a></li>
+        <li><a href="{% url 'vichekesho_app:hadithi' %}">Hadithi</a></li>
+        <li><a href="{% url 'vichekesho_app:picha' %}">Picha</a></li>
+        <li><a href="{% url 'vichekesho_app:about' %}">About</a></li>
+        <li><a href="{% url 'vichekesho_app:contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <main>
+    <div class="container">
+      {% block content %}
+      {% endblock content %}
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; {% now "Y" %} Vichekesho App. All Rights Reserved.</p>
+  </footer>
+
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

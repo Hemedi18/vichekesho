@@ -1,0 +1,27 @@
+{% extends "vichekesho_app/base.html" %}
+
+{% block title %}{{ kichekesho.title }}{% endblock title %}
+
+{% block content %}
+  <div class="detail-page-wrapper">
+    <div class="kichekesho-detail">
+      <h2 class="detail-title">{{ kichekesho.title }}</h2>
+      <p class="detail-content">{{ kichekesho.content }}</p>
+      <div class="detail-footer">
+        <a href="javascript:history.back()" class="back-link">&larr; Rudi nyuma</a>
+      </div>
+    </div>
+
+    <div class="related-jokes-section">
+      <h3>Vingine kama hivi</h3>
+      <div class="kichekesho-grid">
+        {% for related_kichekesho in vichekesho %}
+          <div class="kichekesho-item">
+            <h3>{{ related_kichekesho.title }}</h3>
+            <a href="{% url 'vichekesho_app:soma_kichekesho' related_kichekesho.id %}" class="read-more">Soma zaidi &rarr;</a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

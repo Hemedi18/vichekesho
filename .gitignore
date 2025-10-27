@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Database
+# HII NI MUHIMU SANA! Inazuia database yako ya development isiwekwe kwenye Git.
+db.sqlite3
+
+# Local settings
+# Inazuia faili ya mipangilio ya kompyuta yako (local settings) isionekane.
+local_settings.py
+
+# Environment variables
+# HII NI MUHIMU SANA! Inazuia faili zenye SECRET_KEY, password za database, n.k.
+.env
+.env.*
+
+# Virtual Environment
+# Folda ya virtual environment haipaswi kuwa kwenye Git.
+venv/
+env/
+.venv/
+
+# Static and Media files
+# Folda ambapo 'collectstatic' huweka faili. Badilisha 'staticfiles' kama unatumia jina lingine.
+staticfiles/
+media/
+
+# IDE configuration files
+.idea/
+.vscode/
+
+# Sass / SCSS cache
+.sass-cache/
+
+# Log files
+*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db

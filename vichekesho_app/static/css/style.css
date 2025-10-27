@@ -1,0 +1,519 @@
+/* --- CSS Variables for Light & Dark Themes --- */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --background-color: #f8f9fa;
+  --surface-color: #ffffff;
+  --text-color: #343a40;
+  --heading-font: 'Montserrat', sans-serif;
+  --body-font: 'Lora', serif;
+  --border-radius: 8px;
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+}
+
+body[data-theme="dark"] {
+  --primary-color: #4dabf7;
+  --secondary-color: #adb5bd;
+  --background-color: #121212;
+  --surface-color: #1e1e1e;
+  --text-color: #f1f3f5;
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* --- General Reset & Base Styles --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--body-font);
+  background-color: var(--background-color); /* Will change with theme */
+  color: var(--text-color);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+
+/* Attractive gradient color for main page titles */
+.container > h2 {
+  text-align: center;
+  background: linear-gradient(45deg, var(--primary-color), #0056b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  padding-bottom: 0.5rem; /* Add some space for the gradient to show */
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+  color: #0056b3;
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- Layout: Container --- */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* --- Header & Navigation --- */
+header {
+  background-color: var(--surface-color); /* Will change with theme */
+  box-shadow: var(--shadow);
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease;
+}
+
+/* Style for the header when the page is scrolled */
+header.scrolled {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+header .header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+header nav ul {
+  display: flex;
+  gap: 1.5rem;
+}
+
+header nav a {
+  font-weight: 600;
+  padding: 0.5rem 0;
+  position: relative;
+  color: var(--secondary-color);
+}
+
+header nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color); /* Will change with theme */
+  transition: width 0.3s ease-in-out;
+}
+
+header nav a:hover::after,
+header nav a.active::after {
+  width: 100%;
+}
+
+header nav a:hover,
+header nav a.active {
+  color: var(--primary-color); /* Will change with theme */
+}
+
+/* --- Theme Switcher --- */
+.theme-switcher {
+  position: relative;
+}
+
+.theme-toggle-checkbox {
+  display: none; /* Hide the actual checkbox */
+}
+
+.theme-toggle-label {
+  display: block;
+  width: 50px;
+  height: 26px;
+  background-color: #ccc;
+  border-radius: 13px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.theme-toggle-label::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: white;
+  top: 2px;
+  left: 2px;
+  transition: transform var(--transition-speed) ease;
+}
+
+.theme-toggle-checkbox:checked + .theme-toggle-label {
+  background-color: var(--primary-color);
+}
+
+.theme-toggle-checkbox:checked + .theme-toggle-label::after {
+  /* Move the inner circle to the right */
+  transform: translateX(24px);
+}
+
+/* --- Kichekesho Cards (Home Page) --- */
+.kichekesho-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.kichekesho-item {
+  /* Glass Morphism Effect */
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  
+  /* Animation */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: cardFadeIn 0.5s ease-out forwards;
+}
+
+/* Staggered animation delay for each card */
+/* This is the correct way to write staggered delays in a static CSS file */
+.kichekesho-item:nth-child(1) { animation-delay: 0s; }
+.kichekesho-item:nth-child(2) { animation-delay: 0.1s; }
+.kichekesho-item:nth-child(3) { animation-delay: 0.2s; }
+.kichekesho-item:nth-child(4) { animation-delay: 0.3s; }
+.kichekesho-item:nth-child(5) { animation-delay: 0.4s; }
+.kichekesho-item:nth-child(6) { animation-delay: 0.5s; }
+.kichekesho-item:nth-child(7) { animation-delay: 0.6s; }
+.kichekesho-item:nth-child(8) { animation-delay: 0.7s; }
+.kichekesho-item:nth-child(9) { animation-delay: 0.8s; }
+
+.kichekesho-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.kichekesho-item h3 {
+  color: #2c3e50; /* A deep, attractive blue-charcoal color for card titles */
+  margin-bottom: 0.5rem;
+}
+
+.kichekesho-item p {
+  flex-grow: 1; /* Pushes the "read more" link to the bottom */
+}
+
+.read-more {
+  font-weight: 600;
+  align-self: flex-end; /* Aligns the link to the right */
+}
+
+/* --- Contact Page Styles --- */
+.contact-list {
+  list-style: none;
+  margin-top: 2rem;
+}
+
+.contact-list li {
+  background-color: var(--surface-color);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: var(--border-radius);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-list li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* --- Kichekesho Detail Page (soma_kichekesho.html) --- */
+.detail-page-wrapper {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.kichekesho-detail {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  padding: 2rem 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow);
+  border-left: 5px solid var(--primary-color);
+}
+
+.detail-title {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  /* Reset gradient from h2 */
+  background: none;
+  -webkit-text-fill-color: initial;
+  text-fill-color: initial;
+  text-align: left;
+}
+
+.detail-content {
+  font-size: 1.1rem;
+  line-height: 1.8; /* Increased line height for readability */
+  letter-spacing: 0.5px; /* Space between letters */
+  white-space: pre-wrap; /* Preserves newlines from the database */
+  color: var(--text-color);
+}
+
+.detail-footer {
+  margin-top: 2rem;
+  text-align: right;
+}
+
+.back-link {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  font-weight: 600;
+  font-family: var(--heading-font);
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.back-link:hover {
+  background-color: #0056b3;
+  color: white;
+  transform: scale(1.05);
+}
+
+.related-jokes-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ddd;
+}
+
+.related-jokes-section h3 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+/* --- About Page Styles --- */
+.about-page-wrapper {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.about-hero {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow);
+}
+
+.about-hero h2 {
+  background: none; /* Override gradient */
+  -webkit-text-fill-color: initial;
+  text-fill-color: initial;
+  color: var(--primary-color);
+}
+
+.features-section, .team-section {
+  margin-bottom: 3rem;
+}
+
+.features-section h3, .team-section h3 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+/* Underline effect for section titles */
+.features-section h3::after, .team-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--primary-color);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: cardFadeIn 0.5s ease-out forwards;
+}
+
+.feature-card:nth-child(2) { animation-delay: 0.15s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.feature-card h4 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.team-intro {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+/* --- Main Content --- */
+main {
+  flex-grow: 1;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* --- Footer --- */
+footer {
+  background-color: #343a40;
+  color: var(--background-color);
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: auto;
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark Theme adjustments for Glassmorphism */
+body[data-theme="dark"] .kichekesho-item {
+  background: rgba(30, 30, 30, 0.4);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme for contact list */
+body[data-theme="dark"] .contact-list li {
+  border-color: rgba(255,255,255,0.1);
+}
+
+/* Dark theme for related jokes separator */
+body[data-theme="dark"] .related-jokes-section {
+  border-top-color: #333;
+}
+
+/* Dark theme for about page cards */
+body[data-theme="dark"] .feature-card:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* Card title color in dark mode */
+body[data-theme="dark"] .kichekesho-item h3 {
+  color: #a5d8ff; /* A light, attractive blue for dark mode */
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  header .header-left {
+    width: 100%;
+    justify-content: space-between; /* Pushes h1 and toggle to opposite ends */
+  }
+
+  header nav ul {
+    gap: 0.8rem; /* Reduced gap between nav items */
+    justify-content: center;
+    flex-wrap: nowrap; /* Prevents nav items from wrapping */
+    overflow-x: auto; /* Allows horizontal scrolling if needed */
+    padding-bottom: 5px; /* Adds space for scrollbar if it appears */
+  }
+
+  h1 { font-size: 1.4rem; } /* Further reduced font size for h1 on mobile */
+  h2 { font-size: 1.75rem; }
+  header nav a { font-size: 0.9rem; } /* Reduced font size for nav links */
+
+  .kichekesho-grid {
+    grid-template-columns: 1fr; /* Stack cards vertically on small screens */
+  }
+
+  .kichekesho-detail {
+    padding: 1.5rem;
+    border-left-width: 4px;
+  }
+}
